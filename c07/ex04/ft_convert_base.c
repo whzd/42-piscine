@@ -6,11 +6,12 @@
 /*   By: andteixe <andteixe@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:48:21 by andteixe          #+#    #+#             */
-/*   Updated: 2024/01/29 03:30:07 by andteixe         ###   ########.fr       */
+/*   Updated: 2024/01/29 03:40:56 by andteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 int	ft_validate_base(char *base);
 int	ft_valid_digit(char c, char *base_from);
@@ -41,6 +42,7 @@ char	*ft_itoa(long int nbr, int neg, int to_base_radix, char *base_to)
 		flag = 1;
 	else
 		flag = 0;
+	printf("%d\n", flag);
 	len = size + 1 + flag;
 	res = malloc(len);
 	if (!res)
@@ -53,7 +55,6 @@ char	*ft_itoa(long int nbr, int neg, int to_base_radix, char *base_to)
 		res[--len] = base_to[nbr % to_base_radix];
 		nbr /= to_base_radix;
 	}
-	res[--len] = base_to[nbr % to_base_radix];
 	return (res);
 }
 
@@ -96,12 +97,10 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	}
 	return (NULL);
 }
-
 /*
-#include <stdio.h>
 int	main(void)
 {
-	printf("%s\n", ft_convert_base("2147483647", "0123456789", "01"));
+	printf("%s\n", ft_convert_base("-21474836491", "0123456789", "0123456789"));
 	return (0);
 }
 */

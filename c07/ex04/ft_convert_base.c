@@ -6,7 +6,7 @@
 /*   By: andteixe <andteixe@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:48:21 by andteixe          #+#    #+#             */
-/*   Updated: 2024/01/29 03:40:56 by andteixe         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:10:52 by andteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ char	*ft_itoa(long int nbr, int neg, int to_base_radix, char *base_to)
 		flag = 1;
 	else
 		flag = 0;
-	printf("%d\n", flag);
 	len = size + 1 + flag;
-	res = malloc(len);
+	res = malloc(sizeof(char) * len);
 	if (!res)
 		return (NULL);
 	if (flag)
@@ -58,27 +57,27 @@ char	*ft_itoa(long int nbr, int neg, int to_base_radix, char *base_to)
 	return (res);
 }
 
+int	ft_validate_start(char *nbr, int *neg, int i)
+{
+	*neg = 0;
+	while ((nbr[i] >= '\t' && nbr[i] <= '\r') || nbr[i] == ' ')
+		i++;
+	while (ft_valid_sign(nbr[i], neg))
+		i++;
+	return (i);
+}
+
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
-	char	*res;
-	int		i;
-	int		j;
-	int		size;
-	int		end;
-	int		neg;
-	int		from_base_radix;
-	int		to_base_radix;
-	long int		num;
+	long int	num;
+	int			i;
+	int			j;
+	int			size;
+	int			neg;
 
-	from_base_radix = ft_validate_base(base_from);
-	to_base_radix = ft_validate_base(base_to);
-	if (from_base_radix && to_base_radix)
+	if (ft_validate_base(base_from) && ft_validate_base(base_to))
 	{
-		i = 0;
-		while ((nbr[i] >= '\t' && nbr[i] <= '\r') || nbr[i] == ' ')
-			i++;
-		while (ft_valid_sign(nbr[i], &neg))
-			i++;
+		i = ft_validate_start(nbr, &neg, 0);
 		size = 0;
 		j = i;
 		while (ft_valid_digit(nbr[i], base_from))
@@ -86,21 +85,21 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 			i++;
 			size++;
 		}
-		end = size + j;
 		num = 0;
-		while (j < end)
+		while (j < i)
 		{
-			num = num * from_base_radix + (nbr[j] - base_from[0]);
+			num = num * ft_validate_base(base_from) + (nbr[j] - base_from[0]);
 			j++;
 		}
-		return (ft_itoa(num, neg, to_base_radix, base_to));
+		return (ft_itoa(num, neg, ft_validate_base(base_to), base_to));
 	}
 	return (NULL);
 }
 /*
 int	main(void)
 {
-	printf("%s\n", ft_convert_base("-21474836491", "0123456789", "0123456789"));
+	//printf("%s\n", ft_convert_base("-21474836491", "0123456789", "poneyivf"));
+	printf("%s\n", ft_convert_base("-21474836491", "0123456789", "01"));
 	return (0);
 }
 */

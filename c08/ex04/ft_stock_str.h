@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_point.h                                         :+:      :+:    :+:   */
+/*   ft_stock_str.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andteixe <andteixe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 01:05:33 by andteixe          #+#    #+#             */
-/*   Updated: 2024/01/30 16:03:50 by andteixe         ###   ########.fr       */
+/*   Created: 2024/01/30 16:05:54 by andteixe          #+#    #+#             */
+/*   Updated: 2024/01/30 16:07:36 by andteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_POINT_H
-# define FT_POINT_H
+#ifndef FT_STOCK_STR_H
+# define FT_STOCK_STR_H
 
-typedef struct t_point
+typedef struct s_stock_str
 {
-	int	x;
-	int	y;
-}	t_point;
+	int	size;
+	char	*str;
+	char	*copy;
+}	t_stock_str;
 
 #endif

@@ -1,13 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_abs.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andteixe <andteixe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 00:56:31 by andteixe          #+#    #+#             */
-/*   Updated: 2024/01/30 01:01:04 by andteixe         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:03:15 by andteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define ABS(nbr) ((nbr > 0) * nbr + (nbr < 0) * -nbr)
+#ifndef FT_ABS_H
+# define FT_ABS_H
+
+# define ABS(value) ({ \
+	int nbr = (value); \
+	if (nbr < 0) { \
+		nbr = -nbr; \
+	} \
+	nbr; \
+})
+
+#endif

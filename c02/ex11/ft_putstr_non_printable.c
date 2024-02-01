@@ -6,20 +6,15 @@
 /*   By: andteixe <andteixe@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:20:01 by andteixe          #+#    #+#             */
-/*   Updated: 2024/01/22 17:41:17 by andteixe         ###   ########.fr       */
+/*   Updated: 2024/02/01 02:46:01 by andteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_to_hex(char c, char *hex)
+void	ft_putchar(char c)
 {
-	int	tmp;
-
-	if (c / 16 != 0)
-		ft_to_hex(c / 16, hex);
-	tmp = c % 16;
-	write(1, &hex[tmp], 1);
+	write(1, &c, 1);
 }
 
 void	ft_putstr_non_printable(char *str)
@@ -28,24 +23,25 @@ void	ft_putstr_non_printable(char *str)
 	char	*hex;
 
 	hex = "0123456789abcdef";
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		if (str[i] < ' ' || str[i] > '~')
 		{
-			write(1, "\\", 1);
-			if (str[i] > 16)
-				ft_to_hex(str[i], hex);
-			else
-			{
-				write(1, "0", 1);
-				ft_to_hex(str[i], hex);
-			}
+			ft_putchar('\\');
+			ft_putchar(hex[str[i] / 16]);
+			ft_putchar(hex[str[i] % 16]);
 		}
 		else
-		{
-			write(1, &str[i], 1);
-		}
-		i++;
+			ft_putchar(str[i]);
 	}
 }
+
+/*
+int	main(void)
+{
+	char	str[] = "Coucou\ntu vas bien?";
+	ft_putstr_non_printable(str);
+	return (0);
+}
+*/
